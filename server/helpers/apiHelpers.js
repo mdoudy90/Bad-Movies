@@ -13,7 +13,7 @@ module.exports.genresRequest = () => {
 
 module.exports.moviesRequest = (genreID) => {
   endPoint = 'discover/movie';
-  queries = `&sort_by=vote_average.desc&with_genres=${genreID}`;
+  queries = `&sort_by=vote_average.asc&vote_count.gte=100&with_genres=${genreID}`;
   url = `${root}${endPoint}?api_key=${API_KEY}${queries}`;
   return axios.get(url);
 }
