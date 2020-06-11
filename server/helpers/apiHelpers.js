@@ -2,11 +2,18 @@ const request = require('request');
 const axios = require('axios');
 const { API_KEY } = require('../../config.js');
 
-// write out logic/functions required to query TheMovieDB.org
+const root = 'https://api.themoviedb.org/3/';
+let url, endPoint, queries;
 
-// FOR REFERENCE:
-// https://www.themoviedb.org/account/signup
-// https://developers.themoviedb.org/3/discover/movie-discover
-// Get your API Key and save it in your config file
+module.exports.genresRequest = () => {
+  endPoint = 'genre/movie/list';
+  url = `${root}${endPoint}?api_key=${API_KEY}`;
+  return axios.get(url);
+}
 
-// Don't forget to export your functions and require them within your server file
+module.exports.moviesRequest = (genreID) => {
+  endPoint = 'discover/movie';
+  queries = `&sort_by=vote_average.desc&with_genres=${genreID}`;
+  url = `${root}${endPoint}?api_key=${API_KEY}${queries}`;
+  return axios.get(url);
+}
