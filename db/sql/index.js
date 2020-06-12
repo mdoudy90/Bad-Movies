@@ -16,17 +16,9 @@ connection.query(`
     title VARCHAR(255),
     vote_average FLOAT,
     release_date DATE,
-    genre VARCHAR(50),
-    poster_path VARCHAR(255),
-    overview VARCHAR(255)
+    poster_path VARCHAR(255)
   );
 
 `);
 
 module.exports = connection;
-
-// poster url: https://image.tmdb.org/t/p/w300/hHu786go6qfzJ5xByDLgpKHoDP2.jpg
-// poster_path: "/hHu786go6qfzJ5xByDLgpKHoDP2.jpg""
-
-
-

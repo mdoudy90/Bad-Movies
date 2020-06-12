@@ -1,13 +1,11 @@
 const movieModel = require('../models/movieModel.js');
 const apiHelpers = require('../helpers/apiHelpers.js');
 
-//Return requests to the client
 module.exports = {
   getSearch: (req, res) => {
-    // get the search genre
+    let genreID = req.get('genreID');
 
-    //! UPDATE GENREID PARAMETER
-    apiHelpers.moviesRequest(35)
+    apiHelpers.moviesRequest(genreID)
               .then(({data}) => { res.send(data.results) })
               .catch((err) => { res.sendStatus(500) });
   },
@@ -16,11 +14,26 @@ module.exports = {
               .then(({data}) => { res.send(data) })
               .catch((err) => { res.sendStatus(500) });
 
+
   },
   saveMovie: (req, res) => {
-
+    Promise.resolve(movieModel.dbSave(req.body))
+    .then(() => {res.sendStatus(201)})
+    .catch((err) => { res.sendStatus(500) });
   },
   deleteMovie: (req, res) => {
-
+    let title = req.get('title');
+    Promise.resolve(movieModel.dbDelete(title))
+    .then(() => {res.sendStatus(201)})
+    .catch((err) => { res.sendStatus(500) });
+  },
+  getFavorites: (req, res) => {
+    movieModel.dbGetAll((err, results) => {
+      if (err) {
+        res.sendStatus(500);
+      } else {
+        res.send(results);
+      }
+    })
   }
 }
