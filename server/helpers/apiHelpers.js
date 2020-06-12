@@ -1,6 +1,6 @@
 const request = require('request');
 const axios = require('axios');
-const { API_KEY } = require('../../config.js');
+const API_KEY = process.env.API_KEY || require('../../config.js').API_KEY;
 
 const root = 'https://api.themoviedb.org/3/';
 let url, endPoint, queries;

@@ -4,6 +4,8 @@
   "description": "bad movies practice for junior developers",
   "main": "index.js",
   "scripts": {
+    "start": "node server/index.js",
+    "build": "webpack",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js"
   },
